@@ -9,6 +9,8 @@
 		<!--end::Global Theme Bundle-->
 		<!--begin::Page Scripts(used by this page)-->
 		<script src="<?=BASE_URL?>assets/js/pages/custom/login/login-general.js"></script>
+		<script src="<?=BASE_URL?>assets/js/jquery.validate.js"></script>
+		<script src="<?=BASE_URL?>assets/js/custom.js"></script>
 		<!--end::Page Scripts-->
 	</body>
 	<!--end::Body-->

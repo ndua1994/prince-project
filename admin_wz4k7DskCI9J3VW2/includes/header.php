@@ -37,5 +37,8 @@ License: You must have a valid license purchased only from themeforest(the above
 		<link href="<?=BASE_URL?>assets/css/themes/layout/aside/dark.css" rel="stylesheet" type="text/css" />
 		<!--end::Layout Themes-->
 		<link rel="shortcut icon" href="<?=BASE_URL?>assets/media/logos/favicon.ico" />
+		<script>
+			var base_url='<?=BASE_URL?>';
+		</script>
 	</head>
 	<!--end::Head-->
