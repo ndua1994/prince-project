@@ -45,6 +45,24 @@ submitHandler:function()
 		},
 		success:function(r)
 		{
+			if(r.status=='success')
+			{
+				window.location=base_url+'dashboard.php';
+			}
+			else
+			{
+				
+			Swal.fire({
+			icon: 'error',
+			title: 'Oops...',
+			text: r.msg
+			})
+			}
+
+			$('button[name="login_submit"]').prop('disabled',false);
+			$('button[name="login_submit"]').text('Login');
+			$('#login-frm')[0].reset();
+
 
 		}
 

@@ -6,10 +6,13 @@
 		<script src="<?=BASE_URL?>assets/plugins/global/plugins.bundle.js"></script>
 		<script src="<?=BASE_URL?>assets/plugins/custom/prismjs/prismjs.bundle.js"></script>
 		<script src="<?=BASE_URL?>assets/js/scripts.bundle.js"></script>
+		<script src="<?=BASE_URL?>assets/plugins/custom/fullcalendar/fullcalendar.bundle.js"></script>
+		<script src="<?=BASE_URL?>assets/js/pages/widgets.js"></script>
 		<!--end::Global Theme Bundle-->
 		<!--begin::Page Scripts(used by this page)-->
 		<script src="<?=BASE_URL?>assets/js/pages/custom/login/login-general.js"></script>
 		<script src="<?=BASE_URL?>assets/js/jquery.validate.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
 		<script src="<?=BASE_URL?>assets/js/custom.js"></script>
 		<!--end::Page Scripts-->
 	</body>

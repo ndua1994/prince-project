@@ -2,6 +2,7 @@
 <?php
 include('db/config.php');
 include('includes/header.php');
+include('lock.php');
 ?>
 	<!--begin::Body-->
 	<body id="kt_body" class="header-fixed header-mobile-fixed subheader-enabled subheader-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading">
