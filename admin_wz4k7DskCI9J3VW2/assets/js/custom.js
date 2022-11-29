@@ -77,3 +77,48 @@ submitHandler:function()
 
 
 /*login form validation ends*/
+
+
+
+/*add slider validation starts*/
+
+$('#add-slider').validate({
+
+
+rules:
+{
+	slider_img:
+	{
+		required:true,
+		extension:"jpg|jpeg|png"
+	},
+	slider_heading:
+	{
+		required:true
+	}
+
+},
+messages:
+{
+	slider_img:
+	{
+		required:'Slider Image is required',
+		extension:'Slider Image must be in jpg|jpeg|png format'
+	},
+	slider_heading:
+	{
+		required:'Slider Heading is required'
+	}
+
+},
+submitHandler:function()
+{
+	$('#add-slider').submit();
+}
+
+
+
+});
+
+
+/*add slider validation ends*/
