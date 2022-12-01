@@ -122,3 +122,33 @@ submitHandler:function()
 
 
 /*add slider validation ends*/
+
+
+
+/*Delete record confirmation box starts*/
+
+$('.del_rec').on('click',function(e){
+	e.preventDefault();
+
+var $t=$(this);
+var redirect_url=$t.attr('data-url');
+
+
+Swal.fire({
+  icon: 'question',
+  title: 'Are you sure you want to delete ?',
+  showDenyButton: true,
+  confirmButtonText: 'Yes',
+  denyButtonText: `No`,
+}).then((result) => {
+  if (result.isConfirmed) {
+    window.location=redirect_url;
+  } else if (result.isDenied) {
+    return false;
+  }
+});
+
+});
+
+
+/*Delete record confirmation box ends*/
