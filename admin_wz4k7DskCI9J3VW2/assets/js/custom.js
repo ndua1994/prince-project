@@ -123,6 +123,43 @@ submitHandler:function()
 
 /*add slider validation ends*/
 
+/*edit slider validation starts*/
+
+$('#edit-slider').validate({
+
+
+rules:
+{
+	
+	slider_heading:
+	{
+		required:true
+	}
+
+},
+messages:
+{
+	
+	slider_heading:
+	{
+		required:'Slider Heading is required'
+	}
+
+},
+submitHandler:function()
+{
+	$('#edit-slider').submit();
+}
+
+
+
+});
+
+
+
+
+/*edit slider validation ends*/
+
 
 
 /*Delete record confirmation box starts*/

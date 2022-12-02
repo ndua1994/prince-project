@@ -46,7 +46,7 @@
 									</a>
 								</li>
 							
-								<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+								<li class="menu-item menu-item-submenu <?=(basename($_SERVER['PHP_SELF'])=='manage-slider.php'  || basename($_SERVER['PHP_SELF'])=='add-slider.php' || basename($_SERVER['PHP_SELF'])=='edit-slider.php' || basename($_SERVER['PHP_SELF'])=='view-slider.php'   ? 'menu-item-open' : ' ')?>" aria-haspopup="true" data-menu-toggle="hover">
 									<a href="javascript:;" class="menu-link menu-toggle">
 										<span class="svg-icon menu-icon">
 											<!--begin::Svg Icon | path:assets/media/svg/icons/Home/Mirror.svg-->
@@ -70,7 +70,7 @@
 													<span class="menu-text">Miscellaneous</span>
 												</span>
 											</li>
-											<li class="menu-item" aria-haspopup="true">
+											<li class="menu-item  <?=(basename($_SERVER['PHP_SELF'])=='manage-slider.php'  ? 'menu-item-active' : ' ')?>" aria-haspopup="true">
 												<a href="<?=BASE_URL?>manage-slider.php" class="menu-link">
 													<i class="menu-bullet menu-bullet-dot">
 														<span></span>
@@ -78,7 +78,7 @@
 													<span class="menu-text">Manage</span>
 												</a>
 											</li>
-											<li class="menu-item" aria-haspopup="true">
+											<li class="menu-item  <?=(basename($_SERVER['PHP_SELF'])=='add-slider.php'  ? 'menu-item-active' : ' ')?>" aria-haspopup="true">
 												<a href="<?=BASE_URL?>add-slider.php" class="menu-link">
 													<i class="menu-bullet menu-bullet-dot">
 														<span></span>
