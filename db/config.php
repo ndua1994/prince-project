@@ -2,6 +2,7 @@
 session_start();
 date_default_timezone_set('Asia/Kolkata');
 define('BASE_URL','http://localhost/prince-project/');
+define('BASE_URL_IMG','http://localhost/prince-project/admin_wz4k7DskCI9J3VW2/images/');
 $conn=mysqli_connect('localhost','root','','prince_project');
 if(!$conn)
 {
