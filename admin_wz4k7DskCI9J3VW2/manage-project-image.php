@@ -7,12 +7,14 @@ include('lock2.php');
 
 if(isset($_GET['del']))
 {
-    $prj_cat_id=$_GET['del'];
-   
-	$query=mysqli_query($conn,"delete from tbl_prj_cat where prj_cat_id=$prj_cat_id");
+
+	$prj_img_id=$_GET['del'];
+	$img_name=mysqli_fetch_array(mysqli_query($conn,"select * from tbl_prj_img where prj_img_id=$prj_img_id"));
+    unlink('images/project-image/'.$img_name['prj_img_name']);
+	$query=mysqli_query($conn,"delete from tbl_prj_img where prj_img_id=$prj_img_id");
 	if($query)
 	{
-		header('Location:'.BASE_URL.'manage-project-category.php');
+		header('Location:'.BASE_URL.'manage-project-image.php');
 	}
 
 }
@@ -120,7 +122,7 @@ if(isset($_GET['del']))
 								<!--begin::Info-->
 								<div class="d-flex align-items-center flex-wrap mr-2">
 									<!--begin::Page Title-->
-									<h5 class="text-dark font-weight-bold mt-2 mb-2 mr-5">Manage Project Category</h5>
+									<h5 class="text-dark font-weight-bold mt-2 mb-2 mr-5">Manage Project Image</h5>
 									<!--end::Page Title-->
 									
 								</div>
@@ -163,7 +165,7 @@ if(isset($_GET['del']))
 <li class="navi-header font-weight-bolder text-uppercase font-size-sm text-primary pb-2">Choose an option:</li>
 
 <li class="navi-item">
-<a href="<?=BASE_URL?>export-project-category.php" class="navi-link">
+<a href="<?=BASE_URL?>export-project-image.php" class="navi-link">
 <span class="navi-icon">
 <i class="la la-file-text-o"></i>
 </span>
@@ -176,7 +178,7 @@ if(isset($_GET['del']))
 </div>
 <!--end::Dropdown Menu-->
 </div>
-<a href="<?=BASE_URL?>add-project-category.php" class="btn btn-primary font-weight-bolder">
+<a href="<?=BASE_URL?>add-project-image.php" class="btn btn-primary font-weight-bolder">
 <span class="svg-icon svg-icon-md">
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
 <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -185,7 +187,7 @@ if(isset($_GET['del']))
 <path d="M8.8012943,7.00241953 C9.83837775,5.20768121 11.7781543,4 14,4 C17.3137085,4 20,6.6862915 20,10 C20,12.2218457 18.7923188,14.1616223 16.9975805,15.1987057 C16.9991904,15.1326658 17,15.0664274 17,15 C17,10.581722 13.418278,7 9,7 C8.93357256,7 8.86733422,7.00080962 8.8012943,7.00241953 Z" fill="#000000" opacity="0.3"></path>
 </g>
 </svg>
-</span>Add Project Category</a>
+</span>Add Project Image</a>
 </div>
 </div>
 <div class="card-body">
@@ -193,8 +195,8 @@ if(isset($_GET['del']))
         <thead>
             <tr>
 								<th>ID</th>
-								<th>Category Name</th>
-								<th>View</th>
+								<th>Category</th>
+								<th>Image</th>
 								<th>Status</th>
 								<th>Edit</th>
 								<th>Delete</th>
@@ -204,7 +206,7 @@ if(isset($_GET['del']))
 	
 
 	  <?php
-	  $query=mysqli_query($conn,"select * from tbl_prj_cat order by prj_cat_id asc");
+	  $query=mysqli_query($conn,"select tbl_prj_cat.prj_cat_name,tbl_prj_img.* from tbl_prj_img LEFT JOIN tbl_prj_cat ON tbl_prj_img.prj_img_cat_id=tbl_prj_cat.prj_cat_id");
 	  $totl=mysqli_num_rows($query);
 	  if($totl>0)
 	{
@@ -215,11 +217,12 @@ if(isset($_GET['del']))
 		<tr>
 		<td><?=$id?></td>
 		<td><?=$row['prj_cat_name']?></td>
-		<td><a href="<?=BASE_URL?>view-project-category.php?view_id=<?=$row['prj_cat_id']?>" >View</a></td>
+		<td><img src="<?=BASE_URL_IMG.'project-image/'.$row['prj_img_name'].''?>" width="100"></td>
+	
 		<td><span class="label label-lg font-weight-bold 
 		<?=($row['is_active']==1 ? 'label-light-success' : 'label-light-danger')?> label-inline"><?=($row['is_active']==1 ? 'Active' : 'Inactive')?></span></td>
-		<td><a href="<?=BASE_URL?>edit-project-category.php?edit_rec=<?=$row['prj_cat_id']?>" class="btn btn-warning">Edit</a></td>
-		<td><a href=""  class="btn btn-danger del_rec" data-url="<?=BASE_URL?>manage-project-category.php?del=<?=$row['prj_cat_id']?>">Delete</a></td>
+		<td><a href="<?=BASE_URL?>edit-project-image.php?edit_rec=<?=$row['prj_img_id']?>" class="btn btn-warning">Edit</a></td>
+		<td><a href=""  class="btn btn-danger del_rec" data-url="<?=BASE_URL?>manage-project-image.php?del=<?=$row['prj_img_id']?>">Delete</a></td>
 		</tr>
 	  <?php $id++;}}else{?>
 	  	<tr>
@@ -230,8 +233,8 @@ if(isset($_GET['del']))
         <tfoot>
             <tr>
 							<th>ID</th>
-								<th>Category Name</th>
-								<th>View</th>
+								<th>Category</th>
+								<th>Image</th>
 								<th>Status</th>
 								<th>Edit</th>
 								<th>Delete</th>
