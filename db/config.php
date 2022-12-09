@@ -1,4 +1,5 @@
 <?php
+error_reporting(0);
 session_start();
 date_default_timezone_set('Asia/Kolkata');
 define('BASE_URL','http://localhost/prince-project/');

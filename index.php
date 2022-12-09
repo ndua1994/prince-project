@@ -3,6 +3,116 @@
 <?php
 include('db/config.php');
 include('includes/header.php');
+
+
+if(isset($_POST['submit_form']))
+{
+   $name=$_POST['name'];
+   $email_id=$_POST['email_id'];
+   $mobile_number=$_POST['mobile_number'];
+   $product_name=$_POST['product_name'];
+   $message=$_POST['message'];
+
+   if(empty($name))
+   {
+     $err[]='Name is required';
+   }
+
+   if(empty($email_id))
+   {
+     $err[]='Email ID is required';
+   }
+
+   if(filter_var($email_id,FILTER_VALIDATE_EMAIL)==false && !empty($email_id))
+   {
+     $err[]='Enter a valid Email ID';
+   }
+
+   if(empty($mobile_number))
+   {
+     $err[]='Mobile Number is required';
+   }
+
+   if(!is_numeric($mobile_number) && !empty($mobile_number))
+   {
+      $err[]='Mobile Number must be a numeric value';
+   }
+
+   if(empty($product_name))
+   {
+     $err[]='Product Name is required';
+   }
+
+   if(empty($message))
+   {
+     $err[]='Message is required';
+   }
+
+
+   if(count($err)==0)
+   {
+
+
+       $query=mysqli_query($conn,"insert into tbl_contact
+                                                         SET name='$name',
+                                                             email_id='$email_id',
+                                                             mobile_number='$mobile_number',
+                                                             product_name='$product_name',
+                                                             message='$message'");
+
+       if($query)
+       {
+            $to = "duanishant71@gmail.com,test@email.com";
+            $subject = "contact form";
+
+            $message = "
+            <html>
+            <head>
+            <title>Contact form</title>
+            </head>
+            <body>
+            <p>This email contains HTML Tags!</p>
+            <table>
+            <tr>
+            <th>name</th>
+            <th>$name</th>
+            </tr>
+            <tr>
+            <td>Email ID</td>
+            <td>$email_id</td>
+            </tr>
+            <tr>
+            <td>Mobile Number</td>
+            <td>$mobile_number</td>
+            </tr>
+             <tr>
+            <td>Product Name</td>
+            <td>$product_name</td>
+            </tr>
+             <tr>
+            <td>Message</td>
+            <td>$message</td>
+            </tr>
+            </table>
+            </body>
+            </html>
+            ";
+
+            // Always set content-type when sending HTML email
+            $headers = "MIME-Version: 1.0" . "\r\n";
+            $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+
+            // More headers
+            $headers .= 'From: <webmaster@example.com>' . "\r\n";
+            $headers .= 'Cc: myboss@example.com' . "\r\n";
+
+            mail($to,$subject,$message,$headers);
+           echo "<script>alert('Record has been submitted successfully !')</script>";
+       }
+   }
+
+
+}
 ?>
 
 
@@ -320,44 +430,56 @@ include('includes/header.php');
     <div class="container-fluid quote my-5 py-5" data-parallax="scroll" data-image-src="img/carousel-2.jpg">
         <div class="container py-5">
             <div class="row justify-content-center">
+
                 <div class="col-lg-7">
+
                     <div class="bg-white rounded p-4 p-sm-5 wow fadeIn" data-wow-delay="0.5s">
+                            <?php if(count($err)!=0){?>
+            <ul class="err_list">
+            <?php foreach($err as $list_err){ ?>
+            <li><?=$list_err?></li>
+            <?php } ?>
+            </ul>
+            <?php }?>
                         <h1 class="display-5 text-center mb-5">Get A Free Quote</h1>
+                        <form action="" method="post" id="contact-frm">
                         <div class="row g-3">
                             <div class="col-sm-6">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control bg-light border-0" id="gname" placeholder="Gurdian Name">
-                                    <label for="gname">Your Name</label>
+                                    <input type="text" class="form-control bg-light border-0" name="name" value="<?=$name?>" placeholder="Name">
+                                    <label for="gname">Name</label>
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-floating">
-                                    <input type="email" class="form-control bg-light border-0" id="gmail" placeholder="Gurdian Email">
-                                    <label for="gmail">Your Email</label>
+                                    <input type="text" class="form-control bg-light border-0" name="email_id"  value="<?=$email_id?>" placeholder="Email ID">
+                                    <label for="gmail">Email ID</label>
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control bg-light border-0" id="cname" placeholder="Child Name">
-                                    <label for="cname">Your Mobile</label>
+                                    <input type="text" class="form-control bg-light border-0" name="mobile_number" value="<?=$mobile_number?>" placeholder="Mobile Number">
+                                    <label for="cname">Mobile Number</label>
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control bg-light border-0" id="cage" placeholder="Child Age">
-                                    <label for="cage">Service Type</label>
+                                    <input type="text" class="form-control bg-light border-0" name="product_name"  value="<?=$product_name?>" placeholder="Product Name">
+                                    <label for="cage">Product Name</label>
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="form-floating">
-                                    <textarea class="form-control bg-light border-0" placeholder="Leave a message here" id="message" style="height: 100px"></textarea>
+                                    <textarea class="form-control bg-light border-0" placeholder="Leave a message here" name="message" id="message" style="height: 100px"><?=$message?></textarea>
                                     <label for="message">Message</label>
                                 </div>
                             </div>
                             <div class="col-12 text-center">
-                                <button class="btn btn-primary py-3 px-4" type="submit">Submit Now</button>
+                                <button class="btn btn-primary py-3 px-4" name="submit_form" type="submit">Submit Now</button>
                             </div>
                         </div>
+                        </form>
+ 
                     </div>
                 </div>
             </div>
@@ -396,12 +518,12 @@ include('includes/header.php');
                         ?>
                 <div class="col-lg-4 col-md-6 portfolio-item id_<?=$row['prj_img_cat_id']?> wow fadeInUp" data-wow-delay="0.1s">
                     <div class="portfolio-inner rounded">
-                        <img class="img-fluid" src="<?=BASE_URL_IMG?>" alt="">
+                        <img class="img-fluid" src="<?=BASE_URL_IMG?>project-image/<?=$row['prj_img_name']?>" alt="">
                         <div class="portfolio-text">
                             <h4 class="text-white mb-4">Landscaping</h4>
                             <div class="d-flex">
-                                <a class="btn btn-lg-square rounded-circle mx-2" href="img/service-1.jpg" data-lightbox="portfolio"><i class="fa fa-eye"></i></a>
-                                <a class="btn btn-lg-square rounded-circle mx-2" href=""><i class="fa fa-link"></i></a>
+                                <a class="btn btn-lg-square rounded-circle mx-2" href="<?=BASE_URL_IMG?>project-image/<?=$row['prj_img_name']?>" data-lightbox="portfolio"><i class="fa fa-eye"></i></a>
+                               
                             </div>
                         </div>
                     </div>

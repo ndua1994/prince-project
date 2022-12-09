@@ -7,12 +7,18 @@ include ('lock2.php');
 if(isset($_POST['add_project_image']))
 {
 	$prj_img_cat_id=$_POST['prj_img_cat_id'];
+	$prj_img_heading=$_POST['prj_img_heading'];
 	$prj_img_name='prj_img_'.rand(0,1000).'_'.$_FILES['prj_img_name']['name'];
 	$is_active=($_POST['is_active']!='' ? 1 : 2);
 
 	if(empty($prj_img_cat_id))
 	{
 		$err[]='Project Category is required';
+	}
+
+	if(empty($prj_img_heading))
+	{
+		$err[]='Project Heading is required';
 	}
 
 	if(empty($_FILES['prj_img_name']['name']))
@@ -24,6 +30,7 @@ if(isset($_POST['add_project_image']))
 	{
 		 $query=mysqli_query($conn,"insert into tbl_prj_img
     	                                             SET prj_img_cat_id='$prj_img_cat_id',
+    	                                                 prj_img_heading='$prj_img_heading',
     	                                                 prj_img_name='$prj_img_name',
     	                                                 is_active=$is_active");
 
@@ -213,6 +220,13 @@ if(isset($_POST['add_project_image']))
 	    <option value="<?=$row['prj_cat_id']?>" <?=($prj_img_cat_id==$row['prj_cat_id'] ? 'selected' : '')?>><?=$row['prj_cat_name']?></option>
 	<?php }?>
 </select>
+</div>
+
+
+	<div class="form-group">
+<label for="exampleInputPassword1">Heading
+<span class="text-danger">*</span></label>
+<input type="text" name="prj_img_heading" placeholder="Heading" class="form-control">
 </div>
 
 <div class="form-group">

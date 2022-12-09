@@ -80,7 +80,7 @@
                 <a href="<?=BASE_URL?>" class="nav-item nav-link active">Home</a>
                 <a href="<?=BASE_URL?>about.php" class="nav-item nav-link">About</a>
                 <a href="<?=BASE_URL?>service.php" class="nav-item nav-link">Services</a>
-                <a href="<?=BASE_URL?>project.php" class="nav-item nav-link">Projects</a>
+                <a href="<?=BASE_URL?>product.php" class="nav-item nav-link">Product</a>
                 <div class="nav-item dropdown">
                     <a href="javascript:void(0)" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
                     <div class="dropdown-menu bg-light m-0">

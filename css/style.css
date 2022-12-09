@@ -518,3 +518,9 @@ h6,
 .copyright a:hover {
     color: var(--primary);
 }
+
+ul.err_list {
+    list-style-type: none;
+    padding: 0;
+    color: red;
+}

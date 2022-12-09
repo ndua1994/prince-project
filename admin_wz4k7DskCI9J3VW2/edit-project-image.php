@@ -8,6 +8,7 @@ if(isset($_POST['update_project_image']))
 {
 	
 	$prj_img_cat_id=$_POST['prj_img_cat_id'];
+	$prj_img_heading=$_POST['prj_img_heading'];
 	$is_active=($_POST['is_active']!='' ? 1 : 2);
 
 
@@ -19,11 +20,26 @@ if(isset($_POST['update_project_image']))
 	{
 		$prj_img_name=$_POST['prj_img_name_hidden'];
 	}
+
+	if(empty($prj_img_cat_id))
+	{
+		$err[]='Project Category is required';
+	}
+
+
+	if(empty($prj_img_heading))
+	{
+		$err[]='Project Heading is required';
+	}
+
+
+
 	
    
 
     $query=mysqli_query($conn,"update tbl_prj_img
     	                                             SET prj_img_cat_id='$prj_img_cat_id',
+    	                                                 prj_img_heading='$prj_img_heading',
     	                                                 prj_img_name='$prj_img_name',
     	                                                 is_active=$is_active where prj_img_id=$edit_id");
 
@@ -205,15 +221,23 @@ $details=mysqli_fetch_array(mysqli_query($conn,"select * from tbl_prj_img where 
 <span class="text-danger">*</span></label>
 <select name="prj_img_cat_id" class="form-control">
 	    <option value=''>Select Category</option>
-	    <?php
-	    $query=mysqli_query($conn,"select * from tbl_prj_cat where is_active=1");
-	    while($row=mysqli_fetch_array($query))
-	    {
-	    ?>
-	    <option value="<?=$row['prj_cat_id']?>" <?=($details['prj_img_cat_id']==$row['prj_cat_id'] ? 'selected' : '')?>><?=$row['prj_cat_name']?></option>
-	<?php }?>
+		<?php
+		$query=mysqli_query($conn,"select * from tbl_prj_cat where is_active=1");
+		while($row=mysqli_fetch_array($query))
+		{
+		?>
+		<option value="<?=$row['prj_cat_id']?>" <?=($details['prj_img_cat_id']==$row['prj_cat_id'] ? 'selected' : '')?>><?=$row['prj_cat_name']?></option>
+		<?php }?>
 </select>
 </div>
+
+
+	<div class="form-group">
+<label for="exampleInputPassword1">Heading
+<span class="text-danger">*</span></label>
+<input type="text" name="prj_img_heading" placeholder="Heading" value="<?=$details['prj_img_heading']?>" class="form-control">
+</div>
+
 
 <div class="form-group">
 <label for="exampleInputPassword1">Image
