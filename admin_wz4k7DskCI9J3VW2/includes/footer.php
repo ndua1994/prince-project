@@ -13,6 +13,8 @@
 		<script src="<?=BASE_URL?>assets/js/pages/custom/login/login-general.js"></script>
 		<script src="<?=BASE_URL?>assets/js/jquery.validate.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+		<script type='text/javascript' src='<?=BASE_URL?>assets/plugins/custom/tinymce/tinymce.bundle.js'></script>
+		<script type='text/javascript' src='<?=BASE_URL?>assets/js/pages/crud/forms/editors/tinymce.js'></script>
 		<script src="<?=BASE_URL?>assets/js/custom.js"></script>
 		<!--end::Page Scripts-->
 	</body>

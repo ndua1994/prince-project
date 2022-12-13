@@ -25,19 +25,27 @@ include('includes/header.php');
         
             <div class="row g-4 portfolio-container">
 
+
+<?php
+$query=mysqli_query($conn,"select * from tbl_product where is_active=1");
+while($row=mysqli_fetch_array($query))
+{
+?>
                 
                 <div class="col-lg-4 col-md-6 portfolio-item first wow fadeInUp" data-wow-delay="0.1s">
                     <div class="portfolio-inner rounded">
-                        <img class="img-fluid" src="img/service-1.jpg" alt="">
+                        <img class="img-fluid" src="<?=BASE_URL_IMG?>product/<?=$row['prod_img']?>" alt="<?=$row['prod_img_alt']?>">
                         <div class="portfolio-text">
-                            <h4 class="text-white mb-4">Landscaping</h4>
+                            <h4 class="text-white mb-4"><?=$row['prod_name']?></h4>
                             <div class="d-flex">
                               
-                                <a class="btn btn-lg-square rounded-circle mx-2" href=""><i class="fa fa-link"></i></a>
+                                <a class="btn btn-lg-square rounded-circle mx-2" href="<?=BASE_URL?>product-detail.php?prod_id=<?=base64_encode($row['prod_id'])?>"><i class="fa fa-link"></i></a>
                             </div>
                         </div>
                     </div>
                 </div>
+<?php }?>
+
                 
                
             </div>
