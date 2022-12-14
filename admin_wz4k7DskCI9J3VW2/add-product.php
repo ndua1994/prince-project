@@ -10,14 +10,13 @@ if(isset($_POST['add_product']))
 	$prod_img='prod_img_'.rand(0,1000).'_'.$_FILES['prod_img']['name'];
 	$prod_img_alt_tag=$_POST['prod_img_alt_tag'];
 	$prod_descp=$_POST['prod_descp'];
+	$prod_slug=$_POST['prod_slug'];
 	$is_active=($_POST['is_active']!='' ? 1 : 2);
 
 	if(empty($prod_name))
 	{
 		$err[]='Product Name is required';
-	}
-
-	
+	}	
 
 	if(empty($_FILES['prod_img']['name']))
 	{
@@ -35,6 +34,12 @@ if(isset($_POST['add_product']))
 	}
 
 
+	if(empty($prod_slug))
+	{
+		$err[]='Product Slug is required';
+	}
+
+
 	if(count($err)==0)
 	{
 		 $query=mysqli_query($conn,"insert into tbl_product
@@ -42,6 +47,7 @@ if(isset($_POST['add_product']))
     	                                                 prod_img='$prod_img',
     	                                                 prod_img_alt_tag='$prod_img_alt_tag',
     	                                                 prod_descp='$prod_descp',
+    	                                                 prod_slug='$prod_slug',
     	                                                 is_active=$is_active");
 
     if($query)
@@ -244,6 +250,13 @@ if(isset($_POST['add_product']))
 <label for="exampleInputPassword1">Description
 <span class="text-danger">*</span></label>
 <textarea name="prod_descp" placeholder="Description" class="form-control" id="kt-tinymce-4"><?=$prod_descp?></textarea>
+</div>
+
+
+	<div class="form-group">
+<label for="exampleInputPassword1">Slug
+<span class="text-danger">*</span></label>
+<input type="text" name="prod_slug" value="<?=$prod_slug?>" placeholder="Slug" class="form-control">
 </div>
 
 <div class="form-group">

@@ -39,7 +39,7 @@ while($row=mysqli_fetch_array($query))
                             <h4 class="text-white mb-4"><?=$row['prod_name']?></h4>
                             <div class="d-flex">
                               
-                                <a class="btn btn-lg-square rounded-circle mx-2" href="<?=BASE_URL?>product-detail.php?prod_id=<?=base64_encode($row['prod_id'])?>"><i class="fa fa-link"></i></a>
+                                <a class="btn btn-lg-square rounded-circle mx-2" href="<?=BASE_URL.'product/'.$row['prod_slug']?>"><i class="fa fa-link"></i></a>
                             </div>
                         </div>
                     </div>

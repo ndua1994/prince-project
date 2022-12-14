@@ -11,6 +11,7 @@ if(isset($_POST['update_product']))
 	$prod_img='prod_img_'.rand(0,1000).'_'.$_FILES['prod_img']['name'];
 	$prod_img_alt_tag=$_POST['prod_img_alt_tag'];
 	$prod_descp=$_POST['prod_descp'];
+	$prod_slug=$_POST['prod_slug'];
 	$is_active=($_POST['is_active']!='' ? 1 : 2);
 
 	if(empty($prod_name))
@@ -50,6 +51,7 @@ if(isset($_POST['update_product']))
     	                                                 prod_img='$prod_img',
     	                                                 prod_img_alt_tag='$prod_img_alt_tag',
     	                                                 prod_descp='$prod_descp',
+    	                                                 prod_slug='$prod_slug',
     	                                                 is_active=$is_active where prod_id=$edit_id");
 
     if($query)
@@ -262,6 +264,13 @@ $details=mysqli_fetch_array(mysqli_query($conn,"select * from tbl_product where 
 <label for="exampleInputPassword1">Description
 <span class="text-danger">*</span></label>
 <textarea name="prod_descp" placeholder="Description" class="form-control" id="kt-tinymce-4"><?=$details['prod_descp']?></textarea>
+</div>
+
+
+	<div class="form-group">
+<label for="exampleInputPassword1">Slug
+<span class="text-danger">*</span></label>
+<input type="text" name="prod_slug" value="<?=$details['prod_slug']?>" placeholder="Slug" class="form-control">
 </div>
 
 

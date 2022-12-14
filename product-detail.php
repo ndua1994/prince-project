@@ -2,8 +2,8 @@
 include('db/config.php');
 include('includes/header.php');
 
-$prod_id=base64_decode($_GET['prod_id']);
-$detail=mysqli_fetch_array(mysqli_query($conn,"select * from tbl_product where prod_id=$prod_id"));
+$prod_id=$_GET['prod_id'];
+$detail=mysqli_fetch_array(mysqli_query($conn,"select * from tbl_product where prod_slug='$prod_id'"));
 ?>
 
     <!-- Page Header Start -->
